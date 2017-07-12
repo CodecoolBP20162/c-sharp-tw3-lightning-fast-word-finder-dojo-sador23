@@ -7,11 +7,27 @@ namespace LightningFastWordFinder
     {
         public string GetLongestWord(string text)
         {
-            string [] input = File.ReadAllText("history-of-egypt-chaldea-syria-babylonia-assyria.txt").Split();
+            bool isSymbol;
+            string [] input = File.ReadAllText("history-of-egypt-chaldea-syria-babylonia-assyria.txt").Split(' ');
             String longest = "";
            foreach(String word in input)
             {
-                if (word.Length > longest.Length) longest = word; 
+                isSymbol = false;
+                foreach (Char c in word)
+                {
+                    if (Char.IsSymbol(c))
+                    {
+                        isSymbol = true;
+                        break;
+                    }
+                }
+                if (!isSymbol)
+                {
+                    if (word.Length > longest.Length) longest = word;
+                }
+                
+
+
             }
             return longest;
         }
